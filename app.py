@@ -2,7 +2,7 @@
 import streamlit as st
 import numpy as np
 import pandas as pd
-import tensorflow as tf
+import tf_keras as tf
 import joblib
 from pathlib import Path
 import matplotlib.pyplot as plt
@@ -12,7 +12,7 @@ import matplotlib.patches as mpatches
 # Load Model and Scaler
 # ==============================
 BASE_DIR = Path(__file__).parent
-model = tf.keras.models.load_model(BASE_DIR / 'models' / 'churn_model.h5')
+model = tf.models.load_model(BASE_DIR / 'models' / 'churn_model.h5')
 scaler = joblib.load(BASE_DIR / 'models' / 'scaler.pkl')
 
 # ==============================

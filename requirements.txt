@@ -1,4 +1,4 @@
-tensorflow==2.18.0
+keras
 scikit-learn
 pandas
 numpy
@@ -8,3 +8,4 @@ streamlit
 joblib
 imbalanced-learn
 h5py
+tf-keras
