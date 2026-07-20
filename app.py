@@ -8,25 +8,22 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 
-# ==============================
 # Load Model and Scaler
-# ==============================
+
 BASE_DIR = Path(__file__).parent
 import tensorflow as tf
 model = tf.keras.models.load_model(str(BASE_DIR / 'models' / 'churn_model.keras'))
 scaler = joblib.load(BASE_DIR / 'models' / 'scaler.pkl')
 
-# ==============================
 # Page Configuration
-# ==============================
+
 st.set_page_config(
     page_title="Customer Churn Prediction",
     layout="wide"
 )
 
-# ==============================
 # Custom CSS
-# ==============================
+
 st.markdown("""
     <style>
     .main-header {
@@ -63,9 +60,8 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# ==============================
 # Header
-# ==============================
+
 st.markdown('<p class="main-header">📊 Customer Churn Prediction</p>',
             unsafe_allow_html=True)
 st.markdown('<p class="sub-header">Predict whether a telecom customer will churn using Artificial Neural Network</p>',
@@ -73,9 +69,8 @@ st.markdown('<p class="sub-header">Predict whether a telecom customer will churn
 
 st.divider()
 
-# ==============================
 # Sidebar Inputs
-# ==============================
+
 st.sidebar.image("https://img.icons8.com/color/96/000000/customer.png",
                  width=80)
 st.sidebar.header("📋 Customer Details")
@@ -118,14 +113,12 @@ streaming_tv = st.sidebar.selectbox("Streaming TV",
 streaming_movies = st.sidebar.selectbox("Streaming Movies",
             ["No", "Yes", "No internet service"])
 
-# ==============================
 # Predict Button
-# ==============================
+
 predict_btn = st.sidebar.button("🔍 Predict Churn", use_container_width=True)
 
-# ==============================
 # Model Performance Section
-# ==============================
+
 st.subheader("🏆 Model Performance")
 col1, col2, col3, col4 = st.columns(4)
 
@@ -140,9 +133,8 @@ with col4:
 
 st.divider()
 
-# ==============================
 # Prediction Logic
-# ==============================
+
 if predict_btn:
 
     # Encode inputs
@@ -208,9 +200,8 @@ if predict_btn:
     prediction = model.predict(input_scaled)
     probability = float(prediction[0][0])
 
-    # ==============================
     # Results Section
-    # ==============================
+
     col1, col2 = st.columns(2)
 
     with col1:
@@ -252,9 +243,8 @@ if predict_btn:
 
     st.divider()
 
-    # ==============================
     # Customer Profile
-    # ==============================
+    
     st.subheader("👤 Customer Profile Summary")
     col1, col2, col3 = st.columns(3)
 
@@ -281,9 +271,8 @@ if predict_btn:
 
     st.divider()
 
-    # ==============================
     # Retention Suggestions
-    # ==============================
+    
     st.subheader("💡 Retention Recommendations")
 
     if probability >= 0.3:
@@ -318,9 +307,8 @@ if predict_btn:
 
     st.divider()
 
-    # ==============================
     # Footer
-    # ==============================
+
     st.markdown("""
         <p style='text-align: center; color: grey;'>
         Built with ANN Model | AUC ROC: 0.847 | 
