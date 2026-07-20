@@ -2,7 +2,8 @@
 import streamlit as st
 import numpy as np
 import pandas as pd
-import tf_keras as tf
+import tensorflow as tf
+from tensorflow import keras
 import joblib
 from pathlib import Path
 import matplotlib.pyplot as plt
@@ -12,7 +13,8 @@ import matplotlib.patches as mpatches
 # Load Model and Scaler
 # ==============================
 BASE_DIR = Path(__file__).parent
-model = tf.models.load_model(BASE_DIR / 'models' / 'churn_model.h5')
+from tensorflow import keras
+model = keras.models.load_model(BASE_DIR / 'models' / 'churn_model.keras')
 scaler = joblib.load(BASE_DIR / 'models' / 'scaler.pkl')
 
 # ==============================
@@ -20,7 +22,6 @@ scaler = joblib.load(BASE_DIR / 'models' / 'scaler.pkl')
 # ==============================
 st.set_page_config(
     page_title="Customer Churn Prediction",
-    page_icon="📊",
     layout="wide"
 )
 
@@ -130,11 +131,11 @@ st.subheader("🏆 Model Performance")
 col1, col2, col3, col4 = st.columns(4)
 
 with col1:
-    st.metric(label="AUC ROC Score", value="0.857")
+    st.metric(label="AUC ROC Score", value="0.847")
 with col2:
-    st.metric(label="Recall", value="76.4%")
+    st.metric(label="Recall", value="72.4%")
 with col3:
-    st.metric(label="F1 Score", value="0.639")
+    st.metric(label="F1 Score", value="0.625")
 with col4:
     st.metric(label="Accuracy", value="77%")
 
@@ -323,7 +324,7 @@ if predict_btn:
     # ==============================
     st.markdown("""
         <p style='text-align: center; color: grey;'>
-        Built with ANN Model | AUC ROC: 0.857 | 
+        Built with ANN Model | AUC ROC: 0.847 | 
         Dataset: IBM Telco Customer Churn
         </p>
     """, unsafe_allow_html=True)
